@@ -1,0 +1,13 @@
+﻿using System.Text.Json.Serialization;
+
+namespace sms.to.csharp.Models
+{
+    public abstract class BaseSMSResponse
+    {
+        [JsonPropertyName("message")]
+        public string Message { get; set; }
+
+        [JsonPropertyName("success")]
+        public bool Success { get; set; }
+    }
+}
