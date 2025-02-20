@@ -3,10 +3,7 @@ namespace sms.to.csharp
 {
     internal class Utils
     {
-        internal const string LOGS_FILE = "sms";
-        internal const string DEBUG_FILE = "debug";
-        internal const string ERROR_FILE = "error";
-        internal const string ESTIMATED_FILE = "estimated";
+        
     }
 
     internal class SMSTOEndpoints

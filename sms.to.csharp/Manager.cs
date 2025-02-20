@@ -1,7 +1,6 @@
 ﻿﻿using System.Net.Http;
 using sms.to.csharp.Models;
 using System.Text.Json;
-using sms.to.csharp.Services;
 using System;
 
 namespace sms.to.csharp
@@ -14,7 +13,6 @@ namespace sms.to.csharp
         public static void Init(InitConfigs configuatation)
         {
             configs = configuatation;
-            Logger.Dir = configs.LoggsPath;
 
             _httpClient = new HttpClient();
             _httpClient.BaseAddress = new System.Uri(configs.ApiUrl);
@@ -24,76 +22,58 @@ namespace sms.to.csharp
         internal static TResponse Send<TRequest, TResponse>(TRequest reqModel, string endpoint) where TRequest : class where TResponse : class
         {
             TResponse data = null;
-            try
+
+            string jsonRequest = JsonSerializer.Serialize(reqModel);
+            StringContent jsonContent = new StringContent(jsonRequest, System.Text.Encoding.UTF8, "application/json");
+
+            using (HttpResponseMessage response = _httpClient.PostAsync(endpoint, jsonContent).Result)
             {
-                string jsonRequest = JsonSerializer.Serialize(reqModel);
-                StringContent jsonContent = new StringContent(jsonRequest, System.Text.Encoding.UTF8, "application/json");
-
-                using (HttpResponseMessage response = _httpClient.PostAsync(endpoint, jsonContent).Result)
-                {
-                    try
-                    {
-                        response.EnsureSuccessStatusCode();
-                        string responseBody = response.Content.ReadAsStringAsync().Result;
-                        data = JsonSerializer.Deserialize<TResponse>(responseBody);
-
-                        Logger.Custom(Utils.DEBUG_FILE, $" Http response status code {response.StatusCode}, response: {responseBody}");
-                    }
-                    catch (Exception ex)
-                    {
-                        Logger.Custom(Utils.ERROR_FILE, $"Error: {ex.Message} \n {ex.StackTrace}");
-                    }
-                }
-                return data;
+                response.EnsureSuccessStatusCode();
+                string responseBody = response.Content.ReadAsStringAsync().Result;
+                data = JsonSerializer.Deserialize<TResponse>(responseBody);
             }
-            catch (Exception ex)
-            {
-                Logger.Custom(Utils.ERROR_FILE, $"Error: {ex.Message}, \n {ex.StackTrace} ");
-                return data;
-            }
+            return data;
         }
 
-        public static void SendSMS(SingleSMSRequest model)
+
+        public static SingleSMSResponse SendSMS(SingleSMSRequest model)
         {
-            var data = Send<SingleSMSRequest, SingleSMSResponse>(model, SMSTOEndpoints.SEND) ?? throw new Exception("Could not send sms");
+           return Send<SingleSMSRequest, SingleSMSResponse>(model, SMSTOEndpoints.SEND);
         }
 
-        public static void SendCampaignSMS(CamapignSMSRequest model)
+        public static CampaignSMSResponse SendCampaignSMS(CamapignSMSRequest model)
         {
-            var data = Send<CamapignSMSRequest, CampaignSMSResponse>(model, SMSTOEndpoints.SEND) ?? throw new Exception("Could not send campaign sms");
+            return Send<CamapignSMSRequest, CampaignSMSResponse>(model, SMSTOEndpoints.SEND);
         }
 
-        public static void SendPersonalizedSMS(PersonalizedSMSRequest model)
+        public static PersonalizedSMSResponse SendPersonalizedSMS(PersonalizedSMSRequest model)
         {
-            var data = Send<PersonalizedSMSRequest, CampaignSMSResponse>(model, SMSTOEndpoints.SEND) ?? throw new Exception("Could not send personalized sms");
+            return Send<PersonalizedSMSRequest, PersonalizedSMSResponse>(model, SMSTOEndpoints.SEND);
         }
 
-        public static void SendFlashSMS(SingleSMSRequest model)
+        public static SingleSMSResponse SendFlashSMS(SingleSMSRequest model)
         {
-            var data = Send<SingleSMSRequest, SingleSMSResponse>(model, SMSTOEndpoints.FLASH_SMS_SEND) ?? throw new Exception("Could not send flash sms");
+            return Send<SingleSMSRequest, SingleSMSResponse>(model, SMSTOEndpoints.FLASH_SMS_SEND);
         }
 
-        public static void ScheduleSMS(ScheduleSMSRequest model)
+        public static ScheduleSMSResponse ScheduleSMS(ScheduleSMSRequest model)
         {
-            var data = Send<ScheduleSMSRequest, ScheduleSMSResponse>(model, SMSTOEndpoints.SEND) ?? throw new Exception("Could not schedule sms");
+            return Send<ScheduleSMSRequest, ScheduleSMSResponse>(model, SMSTOEndpoints.SEND);
         }
 
-        public static void EstimateSingleSms(SingleSMSRequest model)
+        public static EstimatedResponse EstimateSingleSms(SingleSMSRequest model)
         {
-            var data = Send<SingleSMSRequest, EstimatedResponse>(model, SMSTOEndpoints.ESTIMATED) ?? throw new Exception("Could not estimate single sms");
-            Logger.Custom(Utils.ESTIMATED_FILE, $"Estimated single sms cost: {data.EstimatedCost} for prefix {model.To.Substring(0, 4)}");
+            return Send<SingleSMSRequest, EstimatedResponse>(model, SMSTOEndpoints.ESTIMATED);
         }
 
-        public static void EstimateCampaignSms(CamapignSMSRequest model)
+        public static EstimatedResponse EstimateCampaignSms(CamapignSMSRequest model)
         {
-            var data = Send<CamapignSMSRequest, EstimatedResponse>(model, SMSTOEndpoints.ESTIMATED) ?? throw new Exception("Could not estimate campaign sms");
-            Logger.Custom(Utils.ESTIMATED_FILE, $"Estimated campaign sms cost: {data.EstimatedCost} for campaign sms");
+            return Send<CamapignSMSRequest, EstimatedResponse>(model, SMSTOEndpoints.ESTIMATED);
         }
 
-        public static void EstimatePersonalizedSms(CamapignSMSRequest model)
+        public static EstimatedResponse EstimatePersonalizedSms(PersonalizedSMSRequest model)
         {
-            var data = Send<CamapignSMSRequest, EstimatedResponse>(model, SMSTOEndpoints.ESTIMATED) ?? throw new Exception("Could not estimate personalized sms");
-            Logger.Custom(Utils.ESTIMATED_FILE, $"Estimated personalized cost: {data.EstimatedCost} for Personalized SMS");
+            return Send<PersonalizedSMSRequest, EstimatedResponse>(model, SMSTOEndpoints.ESTIMATED);
         }
     }
 }
