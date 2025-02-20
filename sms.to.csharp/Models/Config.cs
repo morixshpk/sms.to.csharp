@@ -1,6 +1,6 @@
 ﻿namespace sms.to.csharp.Models
 {
-    public class InitConfigs : IRequestModel
+    public class Config : IRequestModel
     {
         public string SenderId { get; set; }
         public string ApiUrl { get; set; }
