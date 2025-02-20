@@ -1,4 +1,4 @@
-# sms.to.csharp
+# morix sms.to.csharp
 
 ## Overview
 
@@ -9,87 +9,95 @@ sms.to.csharp is a .NET library that integrates with the SMS.to API making it ea
 To use sms.to.csharp, you need to need to call `Init` method with the required parameters.
 
 ```csharp
-using sms.to.csharp;
-using sms.to.csharp.Models;
+using sms.to;
 
-Manager.Init(new InitConfigs
+ApiClient.Init(new Config
 {
-	SenderId = "your_sender_id",
-    ApiKey = "your_api_key",
-    ApiUrl = "https://api.sms.to"
+    ApiKey = "your api key from http://sms.to account",
+    ApiUrl = "https://api.sms.to",
+    SenderId = "Morix"
 });
+
 ```
 
 ### Parameters
 
-- `SenderId` _(string, optional)_ - "From Address", usually your **Brand Name** or **Company Name**, [more about sender id](https://intergo.freshdesk.com/support/solutions/articles/43000513909), Optional if sender id specified in sms.to dashboard.
-- `ApiKey` _(string, required)_ - The API key for authentication.
+- `ApiKey` _(string, required)_ - The API key for authentication, from [sms.to](http://sms.to) account.
 - `ApiUrl` _(string, required)_ - The API URL.
+- `SenderId` _(string, required)_ - "From Address", usually your **Brand Name** or **Company Name**, [more about sender id](https://intergo.freshdesk.com/support/solutions/articles/43000513909)
 
 ## Usage
 
-### Method 1: `SendSMS`
+### Sending SMS
 
-This method sends a single SMS
+Create a SMS object and send a message:
 
 ```csharp
-var results = Manager.SendSMS(new SingleSMSRequest
+var sms = new SMS
 {
-    To = "+1234567890",
-    Message = "Hello, There!"
-});
+    To = "+355690123456",
+    Message = "Your code 123654 to login to accounts.al! " ,
+    SenderId = "Morix"
+};
+
+var sent = sms.Send();
 ```
 
 **Parameters:**
 
-- `model` _(SingleSMSRequest, required)_ - The input model.
-  - `SingleSMSRequest`
-    - `To` _(string, required )_ - Phone number.
-    - `Message` _(string, required)_ - SMS message
+- `To` _(string, required )_ - The recipient's phone number.
+- `Message` _(string, required)_ - The SMS text to send.
+- `SenderId` _(string, required)_ - The sender's identifier.
 
 **Returns:**
 
-- `SingleSMSResponse` - The response model.
+- `bool` - A value indicating whether the SMS was sent successfully.
 
-### Method 2: `EstimateSingleSms`
+### Estimating SMS Cost
 
-Estimates the cost of SMS.
+Create a SMS object and estimate cost:
 
 ```csharp
-var results = Manager.EstimateSingleSms(new SingleSMSRequest
+var sms = new SMS
 {
-    To = "+1234567890",
-    Message = "Hello, There!"
-});
+    To = "+355690123456",
+    Message = "Your code 123654 to login to accounts.al! " ,
+    SenderId = "Morix"
+};
 ```
 
 **Parameters:**
 
-- `model` _(SingleSMSRequest, required)_ - The input model.
-  - `SingleSMSRequest`
-    - `To` _(string, required )_ - Phone number.
-    - `Message` _(string, required)_ - SMS message
+- `To` _(string, required )_ - The recipient's phone number.
+- `Message` _(string, required)_ - The SMS text to send.
+- `SenderId` _(string, required)_ - The sender's identifier.
 
 **Returns:**
 
-- `EstimatedResponse` - The response model data.
+- `decimal` - The estimated cost of sending the SMS message.
 
 ## Full Example Usage
 
 ```csharp
-using sms.to.csharp;
-using sms.to.csharp.Models;
+using sms.to;
 
-Manager.Init(new InitConfigs
+ApiClient.Init(new Config
 {
-	SenderId = "your_sender_id",
-    ApiKey = "your_api_key",
+    ApiKey = "your api key from http://sms.to account",
     ApiUrl = "https://api.sms.to",
+    SenderId = "Morix"
 });
 
-var result = Manager.SendSMS(new SingleSMSRequest
+var sms = new SMS
 {
-    To = "+1234567890",
-    Message = "Hello, There!"
-});
+    To = "+355690123456",
+    Message = "Your code 123654 to login to accounts.al! " ,
+    SenderId = "Morix"
+};
+
+var sent = sms.Send();
 ```
+
+## License
+
+This library is licensed under the [MIT License](LICENSE).
