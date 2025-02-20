@@ -10,6 +10,7 @@ namespace sms.to.csharp.Models
         [JsonPropertyName("message")]
         public string Message { get; set; }
 
+
         public override void Validate()
         {
             base.Validate();
@@ -24,5 +25,6 @@ namespace sms.to.csharp.Models
     {
         [JsonPropertyName("message_id")]
         public string MessageId { get; set; }
+        public decimal EstimatedSmsCost { get; set; }
     }
 }

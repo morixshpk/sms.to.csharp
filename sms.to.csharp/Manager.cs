@@ -41,7 +41,10 @@ namespace sms.to.csharp
         public static SingleSMSResponse SendSMS(SingleSMSRequest model)
         {
             model.Validate();
-            return Send<SingleSMSRequest, SingleSMSResponse>(model, SMSTOEndpoints.SEND);
+            var data = Send<SingleSMSRequest, SingleSMSResponse>(model, SMSTOEndpoints.SEND);
+            var estimatedData = Send<SingleSMSRequest, EstimatedResponse>(model, SMSTOEndpoints.ESTIMATED);
+            data.EstimatedSmsCost = estimatedData.EstimatedCost;
+            return data;
         }
 
         public static CampaignSMSResponse SendCampaignSMS(CamapignSMSRequest model)

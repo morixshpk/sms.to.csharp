@@ -29,7 +29,7 @@ namespace sms.to.csharp_Tests
             Assert.IsNotNull(response);
             Assert.IsTrue(response.Success);
             Assert.IsNotNull(response.MessageId);
-            //Assert.IsNotNull(response.EstimatedSmsCost);
+            Assert.IsNotNull(response.EstimatedSmsCost);
         }
 
         [TestMethod]
