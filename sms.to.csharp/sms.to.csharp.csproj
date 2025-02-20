@@ -4,13 +4,13 @@
 		<TargetFramework>netstandard2.0</TargetFramework>
 		<RootNamespace>sms.to.scharp</RootNamespace>
 		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
-		<AssemblyName>sms.to.scharp</AssemblyName>
+		<AssemblyName>sms.to.csharp</AssemblyName>
 		<Authors>Morix shpk</Authors>
 		<Company>Morix shpk</Company>
 		<Description>.NET Standard 2.0 Library for sending sms via sms.to website.</Description>
-		<AssemblyVersion>1.0.1</AssemblyVersion>
-		<FileVersion>1.0.1</FileVersion>
-		<Version>1.0.1</Version>
+		<AssemblyVersion>1.0.0</AssemblyVersion>
+		<FileVersion>1.0.0</FileVersion>
+		<Version>1.0.0</Version>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageLicenseFile>License.txt</PackageLicenseFile>
 		<IncludeContentInPack>true</IncludeContentInPack>
