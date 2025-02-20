@@ -2,7 +2,7 @@
 
 namespace sms.to.csharp.Models
 {
-    public abstract class BaseSMSResponse
+    internal abstract class BaseSMSResponse
     {
         [JsonPropertyName("message")]
         public string Message { get; set; }

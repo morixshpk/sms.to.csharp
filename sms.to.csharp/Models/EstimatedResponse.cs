@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace sms.to.csharp.Models
 {
-    public class EstimatedResponse
+    internal class EstimatedResponse
     {
         [JsonPropertyName("sms_count")]
         public int SMSCount { get; set; }

@@ -1,6 +1,6 @@
 ﻿namespace sms.to.csharp.Models
 {
-    public interface IRequestModel
+    internal interface IRequestModel
     {
         void Validate();
     }

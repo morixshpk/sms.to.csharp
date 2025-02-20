@@ -2,7 +2,7 @@
 
 namespace sms.to.csharp.Models
 {
-    public class SingleSMSRequest : BaseSMSRequest
+    internal class SingleSMSRequest : BaseSMSRequest
     {
         [JsonPropertyName("to")]
         public string To { get; set; }
@@ -21,7 +21,7 @@ namespace sms.to.csharp.Models
         }
     }
 
-    public class SingleSMSResponse : BaseSMSResponse
+    internal class SingleSMSResponse : BaseSMSResponse
     {
         [JsonPropertyName("message_id")]
         public string MessageId { get; set; }

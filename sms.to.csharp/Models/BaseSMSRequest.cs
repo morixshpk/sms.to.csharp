@@ -2,7 +2,7 @@
 
 namespace sms.to.csharp.Models
 {
-    public abstract class BaseSMSRequest : IRequestModel
+    internal abstract class BaseSMSRequest : IRequestModel
     {
         [JsonPropertyName("sender_id")]
         public string SenderId { get; set; }
