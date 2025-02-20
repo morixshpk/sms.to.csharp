@@ -9,6 +9,15 @@ namespace sms.to.csharp.Models
 
         [JsonPropertyName("message")]
         public string Message { get; set; }
+
+        public override void Validate()
+        {
+            base.Validate();
+            if (string.IsNullOrEmpty(To))
+                throw new System.Exception("To cannot be empty");
+            if (string.IsNullOrEmpty(Message))
+                throw new System.Exception("Message cannot be empty");
+        }
     }
 
     public class SingleSMSResponse : BaseSMSResponse

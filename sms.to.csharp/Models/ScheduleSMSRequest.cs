@@ -29,8 +29,32 @@ namespace sms.to.csharp.Models
                 _scheduledFor = date;
             }
         }
+
         [JsonPropertyName("timezone")]
-        public string Timezone { get; set; }
+        private string _timezone;
+        public string Timezone
+        {
+            get
+            {
+                return _timezone;
+            }
+            set
+            {
+                var tz = TimeZoneInfo.FindSystemTimeZoneById(value);
+                _timezone = tz.Id;
+            }
+        }
+
+        public override void Validate()
+        {
+            base.Validate();
+
+            foreach (var message in Messages)
+            {
+                message.Validate();
+            }
+        }
+
     }
 
     public class ScheduleSMSResponse : BaseSMSResponse

@@ -7,6 +7,16 @@ namespace sms.to.csharp.Models
     {
         [JsonPropertyName("messages")]
         public List<Messagee> Messages { get; set; } = new List<Messagee>();
+
+        public override void Validate()
+        {
+            base.Validate();
+
+            foreach (var message in Messages)
+            {
+                message.Validate();
+            }
+        }
     }
 
     public class PersonalizedSMSResponse : BaseSMSResponse
