@@ -22,7 +22,7 @@ namespace sms.to.csharp.Models
             }
             set
             {
-                if(!DateTime.TryParse(value, out DateTime date))
+                if (!DateTime.TryParse(value, out DateTime date))
                 {
                     throw new Exception("cannot parse datetime");
                 }
