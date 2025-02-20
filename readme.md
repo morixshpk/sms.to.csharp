@@ -51,28 +51,28 @@ var results = Manager.SendSMS(new SingleSMSRequest
 
 - `SingleSMSResponse` - The response model.
 
-### Method 2: `SendCampaignSMS`
+### Method 2: `EstimateSingleSms`
 
-Send SMS message to multiple recipients.
+Estimates the cost of SMS.
 
 ```csharp
-var result = Manager.SendCampaignSMS(new CamapignSMSRequest
+var results = Manager.EstimateSingleSms(new SingleSMSRequest
 {
-    To = new List<string> { "+1234567890", "+0987654321" },
+    To = "+1234567890",
     Message = "Hello, There!"
 });
 ```
 
 **Parameters:**
 
-- `model` _(CamapignSMSRequest, required)_ - The required model for campaign SMS.
-  - `CamapignSMSRequest`
-    - `To` _(List\<string\>, required )_ - List with mobile numbers.
+- `model` _(SingleSMSRequest, required)_ - The input model.
+  - `SingleSMSRequest`
+    - `To` _(string, required )_ - Phone number.
     - `Message` _(string, required)_ - SMS message
 
 **Returns:**
 
-- _(CampaignSMSResponse)_ - The response model data.
+- `EstimatedResponse` - The response model data.
 
 ## Full Example Usage
 
