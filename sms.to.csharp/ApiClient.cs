@@ -1,8 +1,8 @@
-﻿using sms.to.csharp.Models;
+﻿using sms.to.Models;
 using System.Net.Http;
 using System.Text.Json;
 
-namespace sms.to.csharp
+namespace sms.to
 {
     public static class ApiClient
     {
@@ -13,11 +13,11 @@ namespace sms.to.csharp
         {
             config.Validate();
 
-            ApiClient._config = config;
+            _config = config;
 
             _httpClient = new HttpClient();
-            _httpClient.BaseAddress = new System.Uri(ApiClient._config.ApiUrl);
-            _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {ApiClient._config.ApiKey}");
+            _httpClient.BaseAddress = new System.Uri(_config.ApiUrl);
+            _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_config.ApiKey}");
         }
 
         internal static TResponse Send<TRequest, TResponse>(TRequest req, string method) where TRequest : class where TResponse : class

@@ -1,4 +1,4 @@
-﻿namespace sms.to.csharp.Models
+﻿namespace sms.to.Models
 {
     internal interface IRequestModel
     {

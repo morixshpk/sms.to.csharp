@@ -1,11 +1,37 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<RootNamespace>sms.to.scharp</RootNamespace>
+		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+		<AssemblyName>sms.to.scharp</AssemblyName>
+		<Authors>Morix shpk</Authors>
+		<Company>Morix shpk</Company>
+		<Description>.NET Standard 2.0 Library for sending sms via sms.to website.</Description>
+		<AssemblyVersion>1.0.1</AssemblyVersion>
+		<FileVersion>1.0.1</FileVersion>
+		<Version>1.0.1</Version>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageLicenseFile>License.txt</PackageLicenseFile>
+		<IncludeContentInPack>true</IncludeContentInPack>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="System.Text.Json" Version="9.0.2" />
-  </ItemGroup>
+	<ItemGroup>
+		<Page Include="License.txt">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</Page>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="System.Text.Json" Version="9.0.2" />
+	</ItemGroup>
 
 </Project>

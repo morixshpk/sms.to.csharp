@@ -1,7 +1,4 @@
-﻿using sms.to.csharp;
-using sms.to.csharp.Models;
-
-namespace sms.to.csharp_Tests
+﻿namespace sms.to.tests
 {
     [TestClass]
     public sealed class Tests
@@ -11,7 +8,7 @@ namespace sms.to.csharp_Tests
         {
             ApiClient.Init(new Config
             {
-                ApiKey = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2F1dGg6ODA4MC9hcGkvdjEvdXNlcnMvYXBpL2tleXMvZ2VuZXJhdGUiLCJpYXQiOjE3Mzk4ODIzNTcsIm5iZiI6MTczOTg4MjM1NywianRpIjoibmVHWkZoUjdYbEFQM1hWbiIsInN1YiI6NDcyODE2LCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.mVebTq5et6mcwTUpOJ8g2WSO-0rLz-gMc7SHYDFp4h0",
+                ApiKey = "your api key from http://sms.to account",
                 ApiUrl = "https://api.sms.to",
                 SenderId = "Testing"
             });

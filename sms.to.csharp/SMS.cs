@@ -1,6 +1,6 @@
-﻿using sms.to.csharp.Models;
+﻿using sms.to.Models;
 
-namespace sms.to.csharp
+namespace sms.to
 {
     public class SMS
     {

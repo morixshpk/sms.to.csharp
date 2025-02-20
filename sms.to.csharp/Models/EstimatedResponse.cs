@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace sms.to.csharp.Models
+namespace sms.to.Models
 {
     internal class EstimatedResponse
     {
