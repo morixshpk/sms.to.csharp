@@ -17,7 +17,7 @@ namespace sms.to
 
             _httpClient = new HttpClient
             {
-                BaseAddress = new System.Uri(_config.ApiUrl)
+                BaseAddress = new System.Uri("https://api.sms.to")
             };
             _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_config.ApiKey}");
         }

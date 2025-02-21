@@ -9,7 +9,6 @@
             ApiClient.Init(new Config
             {
                 ApiKey = "your api key from http://sms.to account",
-                ApiUrl = "https://api.sms.to",
                 SenderId = "Testing"
             });
         }
