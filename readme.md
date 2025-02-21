@@ -64,6 +64,8 @@ var sms = new SMS
     Message = "Your code 123654 to login to accounts.al! " ,
     SenderId = "Morix"
 };
+
+var cost = sms.Estimate();
 ```
 
 **Parameters:**
@@ -100,4 +102,4 @@ var sent = sms.Send();
 
 ## License
 
-This library is licensed under the [MIT License](LICENSE).
+This library is licensed under the [MIT License](https://github.com/morixshpk/sms.to.csharp/blob/main/sms.to.csharp/License.txt).
