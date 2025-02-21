@@ -15,8 +15,10 @@ namespace sms.to
 
             _config = config;
 
-            _httpClient = new HttpClient();
-            _httpClient.BaseAddress = new System.Uri(_config.ApiUrl);
+            _httpClient = new HttpClient
+            {
+                BaseAddress = new System.Uri(_config.ApiUrl)
+            };
             _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_config.ApiKey}");
         }
 
@@ -24,13 +26,13 @@ namespace sms.to
         {
             TResponse data = null;
 
-            string jsonRequest = JsonSerializer.Serialize(req);
-            StringContent jsonContent = new StringContent(jsonRequest, System.Text.Encoding.UTF8, "application/json");
+            var jsonRequest = JsonSerializer.Serialize(req);
+            var jsonContent = new StringContent(jsonRequest, System.Text.Encoding.UTF8, "application/json");
 
-            using (HttpResponseMessage response = _httpClient.PostAsync(method, jsonContent).Result)
+            using (var response = _httpClient.PostAsync(method, jsonContent).Result)
             {
                 response.EnsureSuccessStatusCode();
-                string responseBody = response.Content.ReadAsStringAsync().Result;
+                var responseBody = response.Content.ReadAsStringAsync().Result;
                 data = JsonSerializer.Deserialize<TResponse>(responseBody);
             }
             return data;
